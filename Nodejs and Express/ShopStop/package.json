@@ -1,11 +1,15 @@
 {
   "name": "shopstop",
   "version": "1.0.0",
-  "description": "express fundamentals project",
+  "description": "node.js and express fundamentals project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "delyan1914",
+  "license": "ISC",
+  "dependencies": {
+    "multiparty": "4.2.1",
+    "shortid": "2.2.14"
+  }
 }
