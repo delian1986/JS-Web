@@ -1,0 +1,11 @@
+const storage=require('./storage/storage.js')
+
+storage.put('myKey','myValue')
+storage.put('myKey2','myValue')
+// storage.update('myKey','newValue')
+// storage.get('myKey')
+// storage.deleteKey('myKey2')
+// storage.clear()
+storage.getAll()
+storage.save()
+storage.load()
