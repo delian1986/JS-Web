@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const database = require('../config/database.config')
 const qs = require('querystring')
-const Product=require('../models/Product')
+const Product = require('../models/Product')
 
 module.exports = (req, res) => {
     req.pathname = req.pathname || url.parse(req.url).pathname
@@ -30,24 +30,26 @@ module.exports = (req, res) => {
 
             let queryData = qs.parse(url.parse(req.url).query)
 
-            let products = database.products.getAll()
-            let content = ''
-            
-            if (queryData.query) {
-                products = products.filter(product => product.name.includes(queryData.query))
-            }
-            for (let product of products) {
-                content +=
-                    `<div class="product-cart">
+            Product.find().then((products) => {
+                if (queryData.query) {
+                    products = products.filter(product => product.name.includes(queryData.query))
+                }
+                let content = ''
+
+
+                for (let product of products) {
+                    content +=
+                        `<div class="product-cart">
                     <img class="product-img" src="${product.image}">
                     <h2>${product.name}</h2>
                     <p>${product.description}</p>
                 </div>`
-            }
+                }
+                let html = data.toString().replace('{content}', content)
+                res.write(html)
+                res.end()
+            })
 
-            let html = data.toString().replace('{content}', content)
-            res.write(html)
-            res.end()
         })
     } else {
         return true
