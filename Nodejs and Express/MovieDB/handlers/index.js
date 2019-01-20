@@ -1,5 +1,13 @@
-const homeHandler=require('./home')
-const filesHandler=require('./static-files')
-const movieHandler=require('./movie')
+const HEADER_CONTROLLER = require('./header')
+const HOME_CONTROLLER = require('./home')
+const FILES_CONTROLLER = require('./static-files')
+const MOVIE_CONTROLLER = require('./movie')
+const ERROR_CONTROLLER = require('./error')
 
-module.exports=[homeHandler,filesHandler,movieHandler]
+module.exports = [
+    HEADER_CONTROLLER,
+    HOME_CONTROLLER,
+    FILES_CONTROLLER,
+    MOVIE_CONTROLLER,
+    ERROR_CONTROLLER
+]

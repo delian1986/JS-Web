@@ -1,20 +1,49 @@
-const fs=require('fs')
-const path=require('path')
-const db=require('./data')
-const dbPath=path.join(__dirname,'./data.js')
+const FS = require('fs');
+const PATH = require('path');
+const DB_PATH = PATH.join(__dirname, '/database.json');
 
-function getAllMovies(){
-    if(fs.existsSync(dbPath)===false){
-        fs.writeFileSync(dbPath,'[]')
-        return []
+function getMovies() {
+    if (FS.existsSync(DB_PATH) === false) {
+        FS.writeFileSync(DB_PATH, '[]');
+        return [];
     }
 
-    let json=fs.readFileSync(dbPath).toString() || '[]'
-    
-    return db
-
+    let json = FS.readFileSync(DB_PATH).toString() || '[]';
+    return JSON.parse(json);
 }
 
-module.exports.movies={}
+function saveMovies(movies) {
+    let json = JSON.stringify(movies);
+    FS.writeFileSync(DB_PATH, json);
+}
 
-module.exports.movies.getAll=getAllMovies
+module.exports.movies = {};
+
+module.exports.movies.getAll = getMovies;
+
+module.exports.movies.add = (movie) => {
+    let movies = getMovies();
+
+    movie.id = movies.length + 1;
+    movies.push(movie);
+    saveMovies(movies);
+};
+
+module.exports.movies.getSingle = (id) => {
+    let movies = getMovies();
+    let result = {};
+
+    for (let movie of movies) {
+        if (movie.id == id) {
+            result = movie;
+            break;
+        }
+    }
+
+    return result;
+};
+
+module.exports.movies.getCount = () => {
+    let movies = getMovies();
+    return movies.length;
+};
