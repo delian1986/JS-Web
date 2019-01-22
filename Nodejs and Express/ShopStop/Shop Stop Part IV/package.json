@@ -1,0 +1,19 @@
+{
+  "name": "shop-stop-part-iv",
+  "version": "1.0.0",
+  "description": "homework exercise soft-uni js web january 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "delyan1914",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.5",
+    "multer": "^1.4.1",
+    "pug": "^2.0.3",
+    "types": "^0.1.1"
+  }
+}
