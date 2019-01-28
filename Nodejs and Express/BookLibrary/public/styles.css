@@ -1,0 +1,15 @@
+.menu ul{
+    list-style-type: none;
+}
+
+.menu ul li{
+    display: inline-block;
+}
+
+.container{
+    text-align: center
+}
+
+.error{
+    color: red
+}
