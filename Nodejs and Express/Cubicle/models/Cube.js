@@ -4,23 +4,45 @@ const cubeSchema = new mongoose.Schema({
     name:
     {
         type: String,
-        min: [3, 'Name must be at least 3 characters'],
-        max: [15, 'Name must be at least 3 characters'],
         required: true
     },
     description:
     {
         type: String,
-        min: [20, 'Description must be at least 20 characters'],
-        max: [300, 'Description max be at least 300 characters']
+        required: true
     },
-    imageUrl:
+    image:
     {
         type: String,
         required: true
     },
-    difficulty: { type: Number, min: 1, max: 6 }
+    difficulty: 
+    { 
+        type: Number, 
+        required: true
+    }
 })
+
+cubeSchema.path('name')
+    .validate(function () {
+        return this.name.length >= 3 && this.name.length <= 15
+    }, 'Name must be between 3 and 15 symbols')
+
+cubeSchema.path('description')
+    .validate(function () {
+        return this.description.length >= 20 && this.description.length <= 300
+    }, 'Description must be between 20 and 300 symbols')
+
+cubeSchema.path('image')
+    .validate(function () {
+        return this.image.startsWith('https://')
+            && (this.image.endsWith('.jpg') || this.image.endsWith('.png'))
+    },'Invalid picture')
+
+cubeSchema.path('difficulty')
+    .validate(function () {
+        return this.difficulty >= 1 && this.difficulty <= 6
+    },'Invalid Difficulty')
 
 mongoose.model('Cube', cubeSchema)
 
