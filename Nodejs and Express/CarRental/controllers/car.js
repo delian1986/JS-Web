@@ -1,5 +1,6 @@
 const Car = require('../models/Car')
 const Rent = require('../models/Rent')
+const User=require('../models/User')
 
 module.exports = {
     carAddGet: (req, res) => {
@@ -47,17 +48,23 @@ module.exports = {
     },
     carRentPost:async(req,res)=>{
         try {
+            const userId=req.user.id
             const car = req.params.id
             const user=req.user._id
             const days=Number(req.body.days)
             let date=new Date()
             date.setDate(date.getDate()+days)
 
-            await Rent.create({expiresOn:date,car,owner:user})
+            const rent=await Rent.create({expiresOn:date,car,owner:user})
 
             const rentedCar = await Car.findById(car)
             rentedCar.isRented=true
             rentedCar.save()
+
+            const reqUser=await User.findById(userId)
+            reqUser.rents.push(rent._id)
+
+            reqUser.save()
             
             res.redirect('/car/all')
             return 
