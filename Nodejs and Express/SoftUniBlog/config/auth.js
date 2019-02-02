@@ -20,5 +20,13 @@ module.exports = {
         } else {
             res.redirect('/');
         }
+    },
+    isSameUser: (req, res, next) => {
+        if (req.user.id !== req.params.id) {
+            res.redirect('/');
+            return;
+        }
+
+        next();
     }
 }

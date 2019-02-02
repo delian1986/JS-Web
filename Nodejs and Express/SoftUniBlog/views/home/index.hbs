@@ -1,24 +1,29 @@
 <div class="container body-content">
     <div class="row">
+        {{#if articles}}
+        {{#each articles}}
         <div class="col-md-6">
             <article>
                 <header>
-                    <h2>Title1</h2>
+                    <h2>{{title}}</h2>
                 </header>
 
-                <p>Content1
-                </p>
+                <p>{{content}}</p>
 
                 <small class="author">
-                    Author1
+                    {{author}}
                 </small>
 
                 <footer>
                     <div class="pull-right">
-                        <a class="btn btn-default btn-xs" href="/article/details/someID">Read more &raquo;</a>
+                        <a class="btn btn-default btn-xs" href="/article/details/{{_id}}">Read more &raquo;</a>
                     </div>
                 </footer>
             </article>
         </div>
+        {{/each}}
+        {{else}}
+            <h1>No Articles in database!</h1>
+        {{/if}}
     </div>
 </div>
