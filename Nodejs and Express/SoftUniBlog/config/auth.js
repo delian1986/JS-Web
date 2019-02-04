@@ -14,7 +14,7 @@ module.exports = {
             res.redirect('/user/login');
         }
     },
-	isAnonymous: (req, res, next) => {
+    isAnonymous: (req, res, next) => {
         if (!req.isAuthenticated()) {
             next();
         } else {
@@ -29,5 +29,19 @@ module.exports = {
 
         next();
     },
-    
+    canAccess: (req, res, next) => {
+
+        if (req.user) {
+            const articleId = req.params.id
+            if (req.user.roles.indexOf('Admin') > -1 || req.user.articles.indexOf(articleId) > -1) {
+                next()
+            } else {
+                res.redirect('/');
+            }
+        } else {
+            res.redirect('/user/login');
+
+        }
+    }
+
 }

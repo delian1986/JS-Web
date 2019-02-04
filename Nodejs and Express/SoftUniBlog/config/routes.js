@@ -17,7 +17,11 @@ module.exports = app => {
     app.get('/article/create',restrictedPages.isAuthed,articleController.createGet)
     app.post('/article/create',restrictedPages.isAuthed,articleController.createPost)
     app.get('/article/details/:id',articleController.detailsGet)
-
+    app.get('/article/edit/:id',restrictedPages.canAccess,articleController.editGet)
+    app.post('/article/edit/:id',restrictedPages.canAccess,articleController.editPost)
+    app.get('/article/delete/:id',restrictedPages.canAccess,articleController.deleteGet)
+    app.post('/article/delete/:id',restrictedPages.canAccess,articleController.deletePost)
+    
 
     app.all('*', (req, res) => {
         res.status(404);
