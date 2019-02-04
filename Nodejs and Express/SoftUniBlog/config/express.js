@@ -28,14 +28,12 @@ module.exports = app => {
         next();
     });
 
-    //skeleton to add
     app.use((req, res, next) => {
         if (req.user) {
             res.locals.isAdmin = req.user.roles.indexOf('Admin') !== -1;
         }
         next();
     });
-    // end
 
     app.set('view engine', '.hbs');
 

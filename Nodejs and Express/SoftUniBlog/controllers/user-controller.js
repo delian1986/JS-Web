@@ -11,9 +11,10 @@ module.exports = {
         const hashedPass =
             encryption.generateHashedPassword(salt, reqUser.password);
 
-        if(req.password!==req.repeatedPassword){
-            
+        if (req.password !== req.repeatedPassword) {
+            res.render('user/register',reqUser);
         }
+
         try {
             const user = await User.create({
                 email: reqUser.email,
@@ -41,12 +42,12 @@ module.exports = {
         res.redirect('/');
     },
     loginGet: (req, res) => {
-        res.render('users/login');
+        res.render('user/login');
     },
     loginPost: async (req, res) => {
         const reqUser = req.body;
         try {
-            const user = await User.findOne({ username: reqUser.username });
+            const user = await User.findOne({ email: reqUser.email });
             if (!user) {
                 errorHandler('Invalid user data');
                 return;
@@ -69,7 +70,7 @@ module.exports = {
         function errorHandler(e) {
             console.log(e);
             res.locals.globalError = e;
-            res.render('users/login');
+            res.render('user/login');
         }
     }
 };
