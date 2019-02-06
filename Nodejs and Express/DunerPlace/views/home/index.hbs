@@ -1,0 +1,41 @@
+<h1>Welcome to Doner Place!</h1>
+<p>We offer a wide variety of tasty doner kebab, cutosmized to your liking. Choose from different sizes of chicken,
+    beef and lamb and any topping you want. Place your order now!</p>
+<div class="products">
+    {{#if isAdmin}}
+    <h2>Admin</h2>
+    <div class="product-card">
+        <img src="img/new.png">
+        <a href="/product/add" class="button product-title">Create Product</a>
+    </div>
+    {{/if}}
+
+    {{#if products}}
+    {{#if products.chicken}}
+    <h2>Chicken Doner</h2>
+    {{#each products.chicken}}
+    {{>duner}}
+
+    {{/each}}
+    {{/if}}
+
+    {{#if products.beef}}
+    <h2>Beef Doner</h2>
+    {{#each products.beef}}
+    {{>duner}}
+    {{/each}}
+    {{/if}}
+
+    {{#if products.lamb}}
+
+    <h2>Lamb Doner</h2>
+    {{#each products.lamb}}
+    {{>duner}}
+    {{/each}}
+
+    {{/if}}
+    {{else}}
+    
+    <h1>No products in database</h1>
+    {{/if}}
+</div>

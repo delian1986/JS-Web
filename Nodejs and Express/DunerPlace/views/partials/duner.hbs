@@ -1,0 +1,8 @@
+<div class="product-card"><img src="{{imageUrl}}">
+        {{#if isAdmin}}
+        <a href="#" class="control"><img class="control-img" src="/img/edit.png"></a>
+        <a href="#" class="control"><img class="control-img" src="/img/delete.png"></a>
+        {{else}}
+        <a href="/order/place/{{_id}}" class="button product-title">Order</a>
+        {{/if}}
+    </div>

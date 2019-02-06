@@ -1,0 +1,26 @@
+<h1>Your orders</h1>
+<div class="orders">
+    {{#if orders}}
+    {{#each orders}}
+    <div class="order">
+        <form method="post">
+        <span class="order-time">{{date}}</span>
+        <span class="order-name">{{product.category}} duner, {{product.size}} cm</span>
+
+        <span class="order-status">
+            <select name="{{_id}}">
+                <option value="{{status}}" hidden="hidden" selected="selected">{{status}}</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+            </select>
+        </span>
+    </div>
+    {{/each}}
+    {{else}}
+    <h2>You don't have orders yet :(</h2>
+    {{/if}}
+<input type="submit" value="Save Changes" class="button" style="border:0">
+</form>
+</div>
