@@ -15,6 +15,9 @@ module.exports = app => {
 
     //article routes
     app.get('/article/create',restrictedPages.isAuthed,articleController.createGet)
+    app.post('/article/create',restrictedPages.isAuthed,articleController.createPost)
+
+    app.get('/article/details/:id',articleController.detailsGet)
     
     app.all('*', (req, res) => {
         res.status(404);
