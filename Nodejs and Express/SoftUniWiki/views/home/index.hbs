@@ -7,7 +7,10 @@
             {{latest.content}} &hellip;
         </p>
         <div class="controls">
-            <a href="/article/details/{{_id}}">Read more</a>
+            <a href="/article/details/{{latest._id}}">Read more</a>
+        </div>
+        <div class="author">
+            author: {{latest.author}}
         </div>
         {{else}}
         <h3>No articles in Db</h3>

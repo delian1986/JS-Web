@@ -2,8 +2,14 @@
     <h2>{{title}}
         {{#if user}}
         <div class="controls">
+            {{#if lockedStatus}}
+            <a href="/article/history/{{_id}}">[history]</a>
+            {{else}}
             <a href="/article/edit/{{_id}}">[edit]</a>
-            <a href="/article/{{_id}}/history">[history]</a>
+            {{/if}}
+            {{#if isAdmin}}
+            <a href="/article/edit/{{_id}}">[edit]</a>
+            {{/if}}
         </div>
         {{/if}}
     </h2>
