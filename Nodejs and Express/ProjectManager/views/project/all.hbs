@@ -1,0 +1,52 @@
+<h1>Projects</h1>
+<h3>Manage Teams</h3>
+{{#if isAdmin}}
+{{!-- ADMIN SECTION --}}
+{{#if projects}}
+<div class="form">
+    <form method="POST">
+        <label>Team</label>
+        <select name="team">
+            {{#each teams}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        <label>Project</label>
+        <select name="project">
+            {{#each projects}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        <input type="submit" value="Distribute">
+    </form>
+</div>
+{{else}}
+<p>You don't have projects or all projects have teams!</p>
+{{/if}}
+{{else}}
+{{!-- USER SECTION --}}
+<form class="search" action="/search/project">
+        <label>Seach: </label>
+        <input name="needle" type="text">
+        <input type="submit" value="Search">
+    </form>
+<div class="projects">
+    {{#if projects}}
+    {{#each projects}}
+    <div class="project">
+        <h2>{{name}}</h2>
+        {{#if team}}
+            <h3>Team: {{team.name}}</h3>
+        {{else}}
+        <h3>Team: No Team assigned</h3>
+        {{/if}}
+        <p>Description: {{description}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <h3>No Projects in Database!</h3>
+    {{/if}}
+    
+</div>
+
+{{/if}}
