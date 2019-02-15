@@ -43,7 +43,9 @@ class App extends Component {
   }
 
   houseHoverEvent(idx){
-    
+    this.setState({
+      selectedHouseIdx:idx
+    })
   }
 
   render() {
@@ -56,14 +58,16 @@ class App extends Component {
         <div className="streets">
           <h2>Streets</h2>
           {this.state.streets.length > 0 ? this.state.streets.map((street, idx) => {
-            return (<Street location={street.location} key={idx} id={idx} />)
+            return (<Street location={street.location} key={idx} id={idx} 
+            streetHoverEvent={this.streetHoverEvent.bind(this)}/>)
           }) : null
           }
         </div>
         <div className="houses">
           <h2>Houses</h2>
           {this.getSelectedStreet().map((home, idx) => {
-            return (<House type={home.type} description={home.description} id={idx} imageUrl={home.imageUrl} price={home.price} key={idx} />)
+            return (<House type={home.type} description={home.description} id={idx} imageUrl={home.imageUrl} price={home.price} key={idx} 
+              houseHoverEvent={this.houseHoverEvent.bind(this)}/>)
           })}
         </div>
         {this.state.streets.length > 0 ? <HouseDetails type={this.getSelectedHouse().type}

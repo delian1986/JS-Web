@@ -1,13 +1,16 @@
-import React from 'react'
+import React,{Component} from 'react'
 
 import './House.css'
 
-const house=function(props){
-    return(
-        <div className="House">
-            <img src={props.imageUrl} alt="alt"></img>
-        </div>
-    )
+class House extends Component{
+    render(){
+        return(
+            <div className="House" onMouseEnter={()=>this.props.houseHoverEvent(this.props.id)}>
+                <img src={this.props.imageUrl} alt="alt"></img>
+            </div>
+        )
+    }
+   
 }
 
-export default house
+export default House
