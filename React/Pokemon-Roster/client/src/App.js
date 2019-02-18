@@ -4,6 +4,8 @@ import './App.css';
 
 import SignUpForm from './components/SignUpForm'
 import LoginForm from './components/LoginForm'
+// import AddPokemonForm from './components/logged-in/AddPokemonForm'
+import LoggedInScreen from './components/logged-in/LoggedInScreen'
 
 class App extends Component {
   constructor(){
@@ -25,6 +27,8 @@ class App extends Component {
   showAppropriateComponent(){
     if(this.state.route==='login'){
       return <LoginForm/>
+    }else if(this.state.route==='loggedIn'){
+          return <LoggedInScreen/>
     }
     return <SignUpForm/>
   }
