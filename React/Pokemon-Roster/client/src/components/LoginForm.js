@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SignUpForm extends Component {
+class LoginForm extends Component {
     constructor() {
         super()
 
@@ -26,7 +26,7 @@ class SignUpForm extends Component {
     handleSubmit(e) {
         e.preventDefault()
         fetch(
-            'http://localhost:5000/auth/signup',
+            'http://localhost:5000/auth/login',
             {
                 method: 'POST',
                 body: JSON.stringify(this.state.form),
@@ -35,21 +35,24 @@ class SignUpForm extends Component {
                 }
             })
             .then(data => data.json())
-            .then(response => console.log(response))
+            .then(response =>{
+                if(response.success && response.token){
+                    localStorage.setItem('token',response.token)
+                }
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
     }
 
     render() {
         return (
             < form >
-                <h1>SignUp</h1>
+                <h1>Login</h1>
                 <div className="form-group">
                     <label htmlFor="input-email">Email address</label>
                     <input type="email" data-name="email" onChange={this.handleChange} className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="input-username">Username</label>
-                    <input type="text" data-name="name" onChange={this.handleChange} className="form-control" id="username" placeholder="Username" />
                 </div>
 
                 <div className="form-group">
@@ -62,4 +65,4 @@ class SignUpForm extends Component {
     }
 }
 
-export default SignUpForm
+export default LoginForm

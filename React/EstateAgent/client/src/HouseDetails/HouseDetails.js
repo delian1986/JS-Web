@@ -3,7 +3,7 @@ import './HouseDetails.css'
 
 const HouseDetails = function (props) {
     return (
-        <div className="HouseDetails">
+        <div className="HouseDetails" >
             <h2>{props.type}</h2>
             <div className="image">
                 <img src={props.imageUrl} alt=""></img>

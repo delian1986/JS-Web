@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SignUpForm extends Component {
+class AddPokemonForm extends Component {
     constructor() {
         super()
 
@@ -26,7 +26,7 @@ class SignUpForm extends Component {
     handleSubmit(e) {
         e.preventDefault()
         fetch(
-            'http://localhost:5000/auth/signup',
+            'http://localhost:5000/pokedex/create',
             {
                 method: 'POST',
                 body: JSON.stringify(this.state.form),
@@ -35,26 +35,30 @@ class SignUpForm extends Component {
                 }
             })
             .then(data => data.json())
-            .then(response => console.log(response))
+            .then(response =>{
+                this.props.updateRoster(response)
+            })
+            .catch((e)=>console.log(e))
+            
+
     }
 
     render() {
         return (
             < form >
-                <h1>SignUp</h1>
+                <h1>Create Pokemon</h1>
                 <div className="form-group">
-                    <label htmlFor="input-email">Email address</label>
-                    <input type="email" data-name="email" onChange={this.handleChange} className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label htmlFor="input-pokemon">Pokemon Name</label>
+                    <input type="text" data-name="pokemonName" onChange={this.handleChange} className="form-control" id="pokemon" aria-describedby="pokeHelp" placeholder="Enter Pokename" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="input-username">Username</label>
-                    <input type="text" data-name="name" onChange={this.handleChange} className="form-control" id="username" placeholder="Username" />
+                    <label htmlFor="input-username">Image</label>
+                    <input type="text" data-name="pokemonImg" onChange={this.handleChange} className="form-control" id="username" placeholder="Username" />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="input-password">Password</label>
-                    <input type="password" data-name="password" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                    <label htmlFor="input-password">Pokemon Info</label>
+                    <input type="text" data-name="pokemonInfo" onChange={this.handleChange} className="form-control" id="exampleInputPassword1" placeholder="Info" />
                 </div>
                 <button type="button" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>
             </form >
@@ -62,4 +66,4 @@ class SignUpForm extends Component {
     }
 }
 
-export default SignUpForm
+export default AddPokemonForm

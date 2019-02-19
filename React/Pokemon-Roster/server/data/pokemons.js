@@ -7,5 +7,8 @@ module.exports = {
     retrivePokemons:()=>{
         console.log('hello from database')
         return pokemons
+    },
+    getLastAdded:()=>{
+        return pokemons.arr.slice(-1)
     }
 }
