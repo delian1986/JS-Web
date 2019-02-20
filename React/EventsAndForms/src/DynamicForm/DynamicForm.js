@@ -6,7 +6,6 @@ import CreateForm from "../Games/CreateForm";
 class DynamicForm extends React.Component {
 
     render() {
-        // let loggedIn= this.props.loginForm ? <LogInForm/> : <RegisterForm/>
         return (
             <div>
                 <div>

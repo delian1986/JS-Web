@@ -17,6 +17,7 @@ class RegisterForm extends React.Component {
                 [e.target.name]:e.target.value
             })
         }
+
     render() {
         return (
             <div className="Register">
@@ -24,6 +25,7 @@ class RegisterForm extends React.Component {
                 <form onSubmit={(event) => {
                     // TODO: prevent the default behavior of the event and use the registerUser function by passing it the data from the form
                     event.preventDefault()
+                    this.props.registerUser(this.state)
                 }}>
                     <label>Username</label>
                     <input type="text" onChange={this.handleChange} name="username" id="usernameReg"/>
