@@ -18,29 +18,82 @@ class App extends Component {
     }
 
     registerUser(user) {
-        console.log(user)
-        // TODO: register a user and login
+        fetch('http://localhost:9999/auth/signup',{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }).then(response=>response.json())
+        .then(body =>{
+            if(body.errors){
+                body.errors.forEach(e=>{
+                    console.log(e.msg)
+                })
+            }else{
+                console.log(body.message);
+                localStorage.setItem('username',body.username)
+                localStorage.setItem('userId',body.userId)
+                this.setState({
+                    user:body.username
+                })
+            }
+
+        })
+        .catch((e)=>console.log(e))
     }
 
     loginUser(user) {
         // TODO: login a user and set sessionStorage items username and token
+        // console.log(user)
+        fetch('http://localhost:9999/auth/signin',{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        }).then(response=>response.json())
+        .then(body =>{
+            if(body.errors){
+                body.errors.forEach(e=>{
+                    console.log(e.msg)
+                })
+            }else{
+                console.log(body.message);
+                // console.log(body);
+                localStorage.setItem('username',body.username)
+                localStorage.setItem('userId',body.userId)
+                localStorage.setItem('token',body.token)
+                this.setState({
+                    user:body.username
+                })
+            }
+
+        })
+        .catch((e)=>console.log(e))
     }
 
     logout(event) {
        // TODO: prevent the default state
        // TODO: delete the data from the sessionStorage
        // TODO: update the state (user: null)
+       localStorage.clear()
+       this.setState({
+           user:null
+       })
     }
 
     componentWillMount() {
         // TODO: check if there is a logged in user using the sessionStorage (if so, update the state, otherwise set the user to null)
-        // if(sessionStorage.user===null){
-        //     this.setState({
-        //         user:false
-        //     })
-        // }
+        const localUsername=localStorage.getItem('username')
+        if(localUsername){
+            this.setState({
+                user:localUsername
+            })
+        }
 
        // TODO: fetch all the games
+       
     }
 
     createGame(data) {
@@ -49,6 +102,9 @@ class App extends Component {
 
     switchForm() {
         // TODO: switch the value of the loginForm property
+        this.setState({
+            loginForm: !this.state.loginForm
+        })
     }
 
     render() {

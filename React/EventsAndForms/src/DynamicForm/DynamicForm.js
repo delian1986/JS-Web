@@ -9,9 +9,14 @@ class DynamicForm extends React.Component {
         return (
             <div>
                 <div>
-                {this.props.loginForm ?
-                    <RegisterForm registerUser={this.props.registerUser}/>:
-                    <LogInForm/>}
+
+                {
+                    this.props.user?
+                    <CreateForm/> :
+                    (this.props.loginForm ?
+                    <LogInForm loginUser={this.props.loginUser}/> :
+                    <RegisterForm registerUser={this.props.registerUser}/> ) 
+                }
                 </div>
             </div>
         )
