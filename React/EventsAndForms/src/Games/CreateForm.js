@@ -23,6 +23,7 @@ class CreateForm extends React.Component  {
                 <h1>Create game</h1>
                 <form onSubmit={(event) => {
                     event.preventDefault()
+                    this.props.createGame(this.state)
                     
                     // TODO: prevent the default behaviour of the click event, call the createGame function and pass it the data from the form
                 }}>

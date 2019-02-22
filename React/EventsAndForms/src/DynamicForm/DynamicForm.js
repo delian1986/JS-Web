@@ -12,7 +12,7 @@ class DynamicForm extends React.Component {
 
                 {
                     this.props.user?
-                    <CreateForm/> :
+                    <CreateForm createGame={this.props.createGame}/> :
                     (this.props.loginForm ?
                     <LogInForm loginUser={this.props.loginUser}/> :
                     <RegisterForm registerUser={this.props.registerUser}/> ) 

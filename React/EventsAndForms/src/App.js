@@ -92,12 +92,40 @@ class App extends Component {
             })
         }
 
+        
        // TODO: fetch all the games
-       
+       fetch("http://localhost:9999/feed/games")
+       .then(data=>data.json())
+       .then(body=>{
+           console.log(body.message)
+
+           this.setState({
+               games:body.games
+           })
+       })
+       .catch((e)=>console.log(e))
     }
 
     createGame(data) {
         // TODO: create a game using fetch with a post method then fetch all the games and update the state 
+        fetch('http://localhost:9999/feed/game/create',{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response=>response.json())
+        .then(body =>{
+            if(body.errors){
+                body.errors.forEach(e=>{
+                    console.log(e.msg)
+                })
+            }else{
+                console.log(body.message);
+                
+            }
+        })
+        .catch((e)=>console.log(e))
     }
 
     switchForm() {
