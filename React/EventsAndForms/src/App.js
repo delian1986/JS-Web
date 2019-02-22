@@ -94,16 +94,7 @@ class App extends Component {
 
         
        // TODO: fetch all the games
-       fetch("http://localhost:9999/feed/games")
-       .then(data=>data.json())
-       .then(body=>{
-           console.log(body.message)
-
-           this.setState({
-               games:body.games
-           })
-       })
-       .catch((e)=>console.log(e))
+       this.fetchGames()
     }
 
     createGame(data) {
@@ -121,9 +112,24 @@ class App extends Component {
                     console.log(e.msg)
                 })
             }else{
+                
                 console.log(body.message);
+                this.fetchGames()
                 
             }
+        })
+        .catch((e)=>console.log(e))
+    }
+
+    fetchGames(){
+        fetch("http://localhost:9999/feed/games")
+        .then(data=>data.json())
+        .then(body=>{
+            console.log(body.message)
+ 
+            this.setState({
+                games:body.games
+            })
         })
         .catch((e)=>console.log(e))
     }
