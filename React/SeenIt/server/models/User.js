@@ -4,30 +4,22 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   email: {
-    type: String,
+    type: Schema.Types.String,
     required: true
   },
   hashedPassword: {
-    type: String,
+    type: Schema.Types.String,
     required: true
   },
-  name: {
-    type: String,
+  username: {
+    type: Schema.Types.String,
     required: true
   },
   salt: {
-    type: String,
+    type: Schema.Types.String,
     required: true
   },
-  roles:
-    [{
-      type: String
-    }],
-  enrolledCourses:
-    [{
-      type:Schema.Types.ObjectId,
-      ref:'Course'
-    }]
+  roles: [{type: Schema.Types.String, required: true}]
 });
 
 userSchema.method({
@@ -35,12 +27,8 @@ userSchema.method({
     const currentHashedPass = encryption.generateHashedPassword(this.salt, password);
 
     return currentHashedPass === this.hashedPassword;
-  },
-  isInRole: function (role) {
-    return this.roles.indexOf(role) !== -1;
   }
-})
-
+});
 
 const User = mongoose.model('User', userSchema);
 
@@ -51,8 +39,8 @@ User.seedAdminUser = async () => {
     const salt = encryption.generateSalt();
     const hashedPassword = encryption.generateHashedPassword(salt, 'Admin');
     return User.create({
-      name: 'Admin',
-      email: 'admin@admin.bg',
+      username: 'Admin',
+      email: 'Admin@admin.bg',
       salt,
       hashedPassword,
       roles: ['Admin']
@@ -62,5 +50,4 @@ User.seedAdminUser = async () => {
   }
 };
 
-
-module.exports = User
+module.exports = User;

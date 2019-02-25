@@ -10,7 +10,6 @@ function validateUser(req, res) {
       message: 'Validation failed, entered data is incorrect',
       errors: errors.array()
     });
-    
     return false;
   }
 
@@ -18,20 +17,20 @@ function validateUser(req, res) {
 }
 
 module.exports = {
-  register: (req, res) => {
+  signUp: (req, res, next) => {
+
     if (validateUser(req, res)) {
-      const { email, password, name } = req.body;
+      const {  username, password,email } = req.body;
       const salt = encryption.generateSalt();
       const hashedPassword = encryption.generateHashedPassword(salt, password);
       User.create({ 
         email,
         hashedPassword,
-        name,
-        roles:'User',
+        username,
         salt
       }).then((user) => {
         res.status(201)
-          .json({ message: 'User created!', userId: user._id });
+          .json({ message: 'User created!', userId: user._id, username: user.username });
       })
       .catch((error) => {
         if (!error.statusCode) {
@@ -42,13 +41,13 @@ module.exports = {
       });
     }
   },
-  login: (req, res) => {
-    const { email, password } = req.body;
+  signIn: (req, res, next) => {
+    const { username, password } = req.body;
 
-    User.findOne({ email: email })
+    User.findOne({ username })
       .then((user) => {
         if (!user) {
-          const error = new Error('A user with this email could not be found');
+          const error = new Error('A user with this username could not be found');
           error.statusCode = 401;
           throw error;
         }
@@ -60,7 +59,7 @@ module.exports = {
         }
 
         const token = jwt.sign({ 
-          email: user.email,
+          username: user.username,
           userId: user._id.toString()
         }
         , 'somesupersecret'
@@ -71,8 +70,8 @@ module.exports = {
              message: 'User successfully logged in!', 
              token, 
              userId: user._id.toString(),
-             role:user.roles[0],
-             enrolledCourses:user.enrolledCourses
+             username: user.username,
+             isAdmin: user.roles.indexOf('Admin') != -1
            });
       })
       .catch(error => {
@@ -83,4 +82,4 @@ module.exports = {
         next(error);
       })
   }
-}
+};
