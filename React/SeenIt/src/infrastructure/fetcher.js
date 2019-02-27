@@ -1,28 +1,37 @@
-const BASE_URL = 'http://localhost:9999'
+const HOST = 'http://127.0.0.1:5000'
 
-export default {
-    get: (endpoint, callback) => 
-        fetch(BASE_URL + endpoint)
-            .then(data => data.json())
-            .then(callback)
-            .catch(console.log),
-            
-    post:(endpoint, data,callback)=>{
-        fetch(BASE_URL + endpoint,{
-            method:'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(data => data.json())
-            .then(body=>{
-                if(body.errors){
-                    body.errors.forEach(e=>{
-                        console.log(e.msg)
-                    })
-                }
-            })
-            .catch((e)=>console.log(e))
-    }
+const fetcher = {
+  async register(data) {
+    const res = await fetch(`${HOST}/auth/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+    return res.json()
+  },
+
+  async login(data) {
+    const res = await fetch(`${HOST}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+    return res.json()
+  },
+  async getAllPosts(){
+
+    const res=await fetch(`${HOST}/posts/all`)
+
+    return res.json()
+  }
 }
+
+
+
+export default fetcher
