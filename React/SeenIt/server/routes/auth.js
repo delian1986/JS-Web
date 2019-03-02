@@ -1,6 +1,8 @@
 const express = require('express')
 const passport = require('passport')
 const validator = require('validator')
+const User = require('../models/User')
+
 
 const router = new express.Router()
 
@@ -123,6 +125,23 @@ router.post('/login', (req, res, next) => {
       user: userData
     })
   })(req, res, next)
+})
+
+router.get('/user/:username',(req,res)=>{
+  const username=req.params.username
+  User.findOne({'username':username})
+    .then(user=>{
+      return res.json({
+        success: true,
+        role: user.roles
+      })
+    })
+    .catch((e)=>{
+      return res.json({
+        success: false,
+        message:'User not found!'
+      })
+    })
 })
 
 module.exports = router

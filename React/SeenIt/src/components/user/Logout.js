@@ -4,9 +4,11 @@ import { toast } from 'react-toastify';
 
 export default class Logout extends Component{
     logout=()=>{
-        sessionStorage.clear()
+        localStorage.clear()
         toast.success('Successful logout!')
     }
 
-    render=()=><Redirect to='/'/>
+    render=()=>{
+    this.logout()
+    return <Redirect to='/'/>}
 }

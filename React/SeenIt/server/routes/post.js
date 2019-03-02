@@ -332,4 +332,16 @@ router.delete('/delete/:id', authCheck, (req, res) => {
   }
 })
 
+router.get('/details/:id',(req,res)=>{
+  const id=req.params.id
+  console.log(id);
+  Post.findById(id).populate('author','username')
+    .then((post)=>{
+      return res.status(200).json({
+        post
+      })
+    })
+    .catch(console.log())
+})
+
 module.exports = router

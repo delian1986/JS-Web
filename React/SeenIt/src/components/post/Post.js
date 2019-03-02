@@ -10,7 +10,7 @@ export default class Post extends Component {
             </div>
             <div className="col thumbnail">
                 <a href={this.props.url}>
-                    <img src={this.props.imageUrl} />
+                    <img src={this.props.imageUrl} alt="img" />
                 </a>
             </div>
             <div className="post-content">
@@ -20,9 +20,6 @@ export default class Post extends Component {
                     </a>
                 </div>
                 <div className="details">
-                    <div className="info">
-                        {/* {postService.createdBeforeDays(this.props._kmd.ect)} */}
-                    </div>
                     <div className="controls">
                         <ul>
                             <li className="action">

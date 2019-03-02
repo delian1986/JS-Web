@@ -8,6 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/common/Header';
 import Home from './components/Home/Home';
 import Catalog from './components/catalog/Catalog';
+import Logout from './components/user/Logout';
+import PostDetails from './components/post/PostDetails';
+
+import {withAdminAuthorization} from './components/hoc/withAuthorization'
+
 
 
 class App extends Component {
@@ -18,7 +23,9 @@ class App extends Component {
         <Header/>
         <ToastContainer/>
         <Route path='/' exact component={Home}/>
-        <Route path='/catalog' exact component={Catalog}/>
+        <Route path='/catalog' exact component={withAdminAuthorization(Catalog)}/>
+        <Route path='/logout' component={Logout}/>
+        <Route path='/catalog/details/:id' exact component={PostDetails} />
         </main>
       </div>
     );

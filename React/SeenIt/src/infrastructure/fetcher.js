@@ -29,6 +29,24 @@ const fetcher = {
     const res=await fetch(`${HOST}/posts/all`)
 
     return res.json()
+  },
+  async getUserRole(data){
+    const res=await fetch(`${HOST}/auth/user/${data}`)
+    return res.json()
+  },
+  async findPostById(id){
+    const res=await fetch(`${HOST}/posts/details/${id}`)
+    return res.json()
+  },
+  async createComment(data){
+    const res=await fetch(`${HOST}/comment/create`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    return res.json()
   }
 }
 
