@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-success" routerLink="/recipes/new">New Recipe</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div *ngFor="let r of recipes$ | async" class="col-xs-12">
+        <a
+        routerLink="/recipes/detail/{{r.id}}"
+        style="cursor: pointer;"
+        class="list-group-item clearfix">
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">{{ r.name }}</h4>
+          <p class="list-group-item-text">{{ r.description }}</p>
+        </div>
+        <span class="pull-right">
+              <img
+                [src]="r.imagePath"
+                alt="{{ r.name }}"
+                class="img-responsive"
+                style="max-height: 50px;">
+         </span>
+      </a>      
+    </div>
+  </div>
+  
+  

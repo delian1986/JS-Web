@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-xs-12">
+      <form #f="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                required
+                type="text"
+                id="name"
+                name="name"
+                [(ngModel)]="bindingModel.name"
+                #name="ngModel"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="imagePath">Image URL</label>
+              <input
+                required
+                type="text"
+                id="imagePath"
+                name="imagePath"
+                [(ngModel)]="bindingModel.imagePath"
+                class="form-control"
+                #imagePath="ngModel">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12" *ngIf="imagePath.value">
+            <img [src]="imagePath.value" class="img-responsive">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <textarea
+                required
+                type="text"
+                id="description"
+                class="form-control"
+                name="description"
+                [(ngModel)]="bindingModel.description"
+                #description="ngModel"
+                rows="6"></textarea>
+            </div>
+          </div>
+        </div>
+       <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Create</button>
+      </form>
+    </div>
+  </div>
+  
