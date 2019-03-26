@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './service/movies.service';
 import { MovieComponent } from './movie/movie.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    FormsModule
   ],
   providers: [
     MoviesService
