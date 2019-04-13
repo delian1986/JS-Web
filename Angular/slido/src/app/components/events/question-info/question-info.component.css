@@ -1,0 +1,8 @@
+.question-card {
+    max-width: 400px;
+    width: 500px !important;
+  }
+  
+  .question-header-image {
+    background-size: cover;
+  }

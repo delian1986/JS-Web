@@ -1,0 +1,17 @@
+<mat-card class="question-card">
+  <mat-card-header>
+    <mat-icon>perm_identity</mat-icon>
+    <div mat-card-avatar class="question-header-image"></div>
+    <mat-card-title>{{questionInfo.author}}</mat-card-title>
+    <mat-card-subtitle>{{questionInfo.createdOn.toDate() | date:'dd/MM/yyyy HH:mm:ss'}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{questionInfo.text}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button><mat-icon>thumb_up</mat-icon></button>
+    <button mat-icon-button><mat-icon>thumb_down</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

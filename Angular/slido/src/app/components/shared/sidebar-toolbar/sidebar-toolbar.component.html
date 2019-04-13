@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSideNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div><a routerLink="/">Slido</a></div>
+  <ul fxFlex fxLayout fxLayoutAlign="flex-end" fxLayoutGap="10px">
+    <ng-template [ngIf]="!isAuth">
+      <li>
+        <a routerLink="/login">Login</a>
+      </li>
+      <li>
+        <a routerLink="/register">Register</a>
+      </li>
+    </ng-template>
+
+    <ng-template [ngIf]="isAuth">
+      <li>
+        <a routerLink="/user/events">Events</a>
+      </li>
+      <li>
+        <a (click)="logout()" class="logout-link" mat-list-item>
+
+          Logout
+        </a>
+      </li>
+    </ng-template>
+
+  </ul>
+</mat-toolbar>

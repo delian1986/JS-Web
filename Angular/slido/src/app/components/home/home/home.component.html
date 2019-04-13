@@ -1,0 +1,14 @@
+<section>
+    <div fxLayout="column" fxLayoutAlign="center center">
+    <h1>Every question matters</h1>
+  </div>
+  <form (ngSubmit)="displayLiveEvent()" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="eventForm">
+    <mat-form-field>
+      <mat-icon matPrefix>event</mat-icon>
+      <input formControlName="code" matInput type="text" placeholder="Enter event code..."/>
+      <mat-error *ngIf="eventForm.hasError">Please enter valid code</mat-error>
+      <mat-hint>Enter your event code here</mat-hint>
+    </mat-form-field>
+    <button color="primary" mat-raised-button [disabled]="eventForm.invalid" submit>Enter</button>
+  </form>
+</section>

@@ -1,0 +1,12 @@
+<section >
+  <app-post-question>
+  </app-post-question>
+  <app-question-info 
+  fxLayoutGap="20px" 
+  fxLayout="column" 
+  fxLayoutAlign="center center"
+  *ngFor="let question of questions"
+  [questionInfo]="question"
+  ></app-question-info>
+ 
+</section>

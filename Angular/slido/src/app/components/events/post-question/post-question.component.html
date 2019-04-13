@@ -1,0 +1,12 @@
+<form fxLayout="column" fxLayoutAlign="center center" [formGroup]="postQuestionForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Question</mat-label>
+        <textarea formControlName="text" matInput placeholder="Ask question" rows="5"></textarea>
+        <mat-icon matSuffix>question_answer</mat-icon>
+        <mat-hint>Question here</mat-hint>
+        <mat-error *ngIf="postQuestionForm.get('text').hasError('required')">Field is required</mat-error>
+        <mat-error *ngIf="postQuestionForm.get('text').hasError('minlenght')">min validaiton</mat-error>
+        <mat-error *ngIf="postQuestionForm.get('text').hasError('maxlenght')">max validation</mat-error>
+      </mat-form-field>
+      <button color="primary" mat-fab [disabled]="postQuestionForm.invalid">Ask</button>
+</form>
