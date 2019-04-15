@@ -1,21 +1,25 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState, getIsAuthenticated } from 'src/app/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements DoCheck {
+export class ContentComponent {
   
-  isLoggedIn: boolean;
+  isLogged$: Observable<boolean>;
 
   constructor(
-    private authService:AuthService
-  ) { }
-
-  ngDoCheck(): void {
-      this.isLoggedIn=this.authService.isAuthenticated();
+    private store:Store<AppState>
+  ) { 
+    this.isLogged$=store.select(getIsAuthenticated);
   }
+
+
+  
 
 }

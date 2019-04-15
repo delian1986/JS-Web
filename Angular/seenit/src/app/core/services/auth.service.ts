@@ -13,16 +13,21 @@ export class AuthService {
   ) { }
 
 
-  get token() {
-    return localStorage.getItem('token');
-  }
+  // get token() {
+  //   return localStorage.getItem('token');
+  // }
 
-  signUp(body: Object) {
+  register(body: {username:string,password:string}) {
     return this.http.post(this.BASE_URL, body);
   }
 
-  signIn(body: Object) {
-    return this.http.post(`${this.BASE_URL}/login`, body)
+  login(body: {username:string,password:string}) {
+    return this.http.post<{
+      username:string,
+      _kmd:{authtoken:string},
+      _id:string
+    }>
+    (`${this.BASE_URL}/login`, body)
   }
 
   logout() {
@@ -30,13 +35,13 @@ export class AuthService {
     );
   }
 
-  isAuthenticated() {
-    return this.token !== null;
-  }
+  // isAuthenticated() {
+  //   return this.token !== null;
+  // }
 
-  saveUserInfo(res: Object) {
-    localStorage.setItem('username', res['username']);
-    localStorage.setItem('token', res['_kmd']['authtoken']);
-    localStorage.setItem('userId', res['_id']);
-  }
+  // saveUserInfo(res: Object) {
+  //   localStorage.setItem('username', res['username']);
+  //   localStorage.setItem('token', res['_kmd']['authtoken']);
+  //   localStorage.setItem('userId', res['_id']);
+  // }
 }
