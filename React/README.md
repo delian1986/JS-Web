@@ -1,1 +1,1 @@
-![ReactJSFundamentals](https://softuni.bg/Files/OpenCourses/Icon_ReactJSFundamentals.png)
+![ReactJSFundamentals](https://softuni.bg/Files/OpenCourses/Previews/ReactJS_facebook.jpg)
